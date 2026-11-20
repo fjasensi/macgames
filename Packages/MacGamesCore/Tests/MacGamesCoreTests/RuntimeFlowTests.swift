@@ -136,6 +136,35 @@ struct FakeEnvironment {
 }
 
 @Suite(.serialized) struct RuntimeFlowTests {
+    @Test func failedSteamLaunchDoesNotBecomeRecentlyPlayed() throws {
+        let env = try FakeEnvironment(.nierAutomata); defer { env.cleanUp() }
+        let runtime = env.runtime, paths = runtime.paths
+        try env.installSteam()
+        try write("""
+        "AppState"
+        {
+            "appid" "524220"
+            "installdir" "NieRAutomata"
+            "StateFlags" "4"
+        }
+        """, to: paths.appManifest)
+        try write("game", to: paths.gameExe)
+        env.live(["steam.exe"])
+        runtime.gameStartTimeout = 0
+        try runtime.play(LaunchContext(width: 1920, height: 1080))
+        #expect(throws: SetupError.self) { try runtime.waitForGameStart() }
+
+        var preferences = LibraryPreferences()
+        var activity = LibraryActivity()
+        #expect(!activity.observe(gameID: paths.profile.id, state: runtime.state(), at: Date(), preferences: &preferences))
+        #expect(preferences.lastPlayed.isEmpty)
+
+        // The same request only enters history once an actual game process is observed.
+        env.live(["steam.exe", "NieRAutomata.exe"])
+        #expect(activity.observe(gameID: paths.profile.id, state: runtime.state(), at: Date(), preferences: &preferences))
+        #expect(preferences.lastPlayed[paths.profile.id] != nil)
+    }
+
     @Test func nierInstallsInSharedSteamAndRestartsWithDXMT() throws {
         let profile = try #require(GameProfile.named("nier-automata"))
         let env = try FakeEnvironment(profile); defer { env.cleanUp() }

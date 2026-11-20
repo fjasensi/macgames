@@ -56,6 +56,31 @@ final class EnvironmentSettingsModel {
     }
 }
 
+/// Favorites and observed play history are shared by all cards and saved locally.
+@MainActor @Observable
+final class LibraryPreferencesModel {
+    private(set) var value = LibraryPreferences.load()
+    @ObservationIgnored private var activity = LibraryActivity()
+
+    func toggleFavorite(_ gameID: String) {
+        value.toggleFavorite(gameID)
+        value.save()
+    }
+
+    func setSortOrder(_ order: LibrarySortOrder) {
+        value.sortOrder = order
+        value.save()
+    }
+
+    func observe(gameID: String, state: GameState) {
+        var updated = value
+        if activity.observe(gameID: gameID, state: state, at: Date(), preferences: &updated) {
+            value = updated
+            value.save()
+        }
+    }
+}
+
 /// UI state for one game. Every blocking runtime call runs off the main actor.
 @MainActor @Observable
 final class GameModel: Identifiable {
@@ -70,6 +95,7 @@ final class GameModel: Identifiable {
     /// The game's community online client is installed.
     private(set) var onlineReady = false
     @ObservationIgnored private let gate: OperationGate
+    @ObservationIgnored private let libraryPreferences: LibraryPreferencesModel
     /// This game's task is running.
     var busy: Bool { gate.owner == id }
     /// Any game's task is running; every action waits for it.
@@ -108,9 +134,11 @@ final class GameModel: Identifiable {
     var steamAvailable: Bool { state != .notSetUp && state != .needsSteam }
     var showsSetupSteps: Bool { step != nil || state == .notSetUp || state == .needsSteam }
 
-    init(profile: GameProfile, gate: OperationGate, environments: EnvironmentSettingsStore) {
+    init(profile: GameProfile, gate: OperationGate, environments: EnvironmentSettingsStore,
+         libraryPreferences: LibraryPreferencesModel) {
         self.profile = profile
         self.gate = gate
+        self.libraryPreferences = libraryPreferences
         let (events, sink) = AsyncStream.makeStream(of: RuntimeEvent.self)
         let runtime = GameRuntime(profile: profile, runtime: .inBundle()) { sink.yield($0) }
         self.runtime = runtime
@@ -156,6 +184,7 @@ final class GameModel: Identifiable {
         self.state = state
         self.sessionRunning = live
         self.downloadProgress = download
+        libraryPreferences.observe(gameID: id, state: state)
     }
 
     /// The one action that moves this game to its next stage.
@@ -251,7 +280,10 @@ final class GameModel: Identifiable {
 final class LibraryModel {
     let gate = OperationGate()
     private let environments = EnvironmentSettingsStore()
+    let preferences = LibraryPreferencesModel()
     let games: [GameModel]
+    var searchText = ""
+    var favoritesOnly = false
     /// Remembered between launches.
     var selectedID: String = UserDefaults.standard.string(forKey: "selectedGame")
         .flatMap { id in GameProfile.named(id)?.id } ?? GameProfile.all.first?.id ?? "" {
@@ -259,24 +291,37 @@ final class LibraryModel {
     }
 
     init() {
-        let gate = self.gate, environments = self.environments
-        games = GameProfile.all.map { GameModel(profile: $0, gate: gate, environments: environments) }
+        let gate = self.gate, environments = self.environments, preferences = self.preferences
+        games = GameProfile.all.map {
+            GameModel(profile: $0, gate: gate, environments: environments, libraryPreferences: preferences)
+        }
     }
 
     var selected: GameModel? { games.first { $0.id == selectedID } }
     var selectedEnvironment: GameEnvironment { selected?.profile.gameEnvironment ?? .steam }
 
-    /// Installed games first, then the remaining games grouped by Windows environment.
+    var sortOrder: LibrarySortOrder {
+        get { preferences.value.sortOrder }
+        set { preferences.setSortOrder(newValue) }
+    }
+
+    func isFavorite(_ id: String) -> Bool { preferences.value.favorites.contains(id) }
+    func toggleFavorite(_ id: String) { preferences.toggleFavorite(id) }
+    func lastPlayed(_ id: String) -> Date? { preferences.value.lastPlayed[id] }
+
+    func clearFilters() {
+        searchText = ""
+        favoritesOnly = false
+    }
+
+    /// Filtering only changes visible rows; the selected game and its actions stay independent.
     var sections: [(title: String, games: [GameModel])] {
-        let installed = games.filter { $0.state == .ready || $0.state == .running }
-        let installedIDs = Set(installed.map(\.id))
-        let environmentGroups = GameEnvironment.groups.map { group in
-            (title: group.title, games: group.games.compactMap { profile in
-                games.first { $0.id == profile.id && !installedIDs.contains($0.id) }
-            })
-        }.filter { !$0.games.isEmpty }
-        guard !installed.isEmpty else { return environmentGroups }
-        return [("Installed Games", installed)] + environmentGroups
+        let states = Dictionary(uniqueKeysWithValues: games.map { ($0.id, $0.state) })
+        let models = Dictionary(uniqueKeysWithValues: games.map { ($0.id, $0) })
+        return LibraryCatalog.sections(states: states, preferences: preferences.value,
+                                       search: searchText, favoritesOnly: favoritesOnly).map { section in
+            (section.title, section.games.compactMap { models[$0.id] })
+        }
     }
 
     /// Games in sidebar order, for ⌘1…⌘9.

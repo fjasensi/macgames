@@ -4,6 +4,8 @@ All notable changes to MacGames are listed here.
 
 ## Unreleased
 
+- Search the library with Command-F, mark favorites, and sort by recently played games.
+  Favorites and play history stay on this Mac, and failed launch attempts do not add history.
 - Show installed and running games first in an Installed Games sidebar section, with the
   remaining games grouped by environment. The list updates as installations change.
 - Add a Steam profile for NieR:Automata in the shared library, using DXMT for DirectX 11.
