@@ -6,7 +6,7 @@
 
 <p align="center">
   Play your Windows games from Steam and Battle.net on an Apple Silicon Mac.<br>
-  Twenty-one games, each with graphics and performance settings tuned for it.
+  Graphics and performance settings configured for each game.
 </p>
 
 <p align="center">
@@ -58,6 +58,10 @@
 | [Heroes of Might and Magic III](https://macgames.app/games/heroes-of-might-and-magic-iii/) | Steam library | cnc-ddraw, sound fix |
 | [Diablo IV](https://macgames.app/games/diablo-iv/) | Steam library | D3DMetal |
 | [NieR:Automata](https://store.steampowered.com/app/524220/) | Steam library | DXMT, DirectX 11 |
+| [A Plague Tale: Innocence](https://store.steampowered.com/app/752590/) | Steam library | D3DMetal (gameplay testing pending) |
+| [A Plague Tale: Requiem](https://store.steampowered.com/app/1182900/) | Steam library | D3DMetal (gameplay testing pending) |
+| [Resonance: A Plague Tale Legacy](https://store.steampowered.com/app/2713000/) | Steam library | D3DMetal (gameplay testing pending) |
+| [Stellar Blade](https://store.steampowered.com/app/3489700/) | Steam library | D3DMetal (gameplay testing pending) |
 | [Path of Exile 2](https://macgames.app/games/path-of-exile-2/) | Steam library | D3DMetal, DirectX 12 |
 | [Hogwarts Legacy](https://macgames.app/games/hogwarts-legacy/) | Steam library | D3DMetal |
 | [The Witcher 3: Wild Hunt](https://macgames.app/games/the-witcher-3-wild-hunt/) | Steam library | D3DMetal, FidelityFX proxy |

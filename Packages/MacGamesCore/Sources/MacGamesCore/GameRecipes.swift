@@ -44,7 +44,8 @@ public enum GameRecipes {
                                     sandbox: .full, libd3dshared: true)
         case "poe2":
             return EnvironmentEdits(set: ["WINEMSYNC": "0"], sandbox: .xdg, libd3dshared: true)
-        case "diablo4", "diablo2-resurrected-steam":
+        case "diablo4", "diablo2-resurrected-steam",
+             "plague-tale-innocence", "plague-tale-requiem", "plague-tale-resonance", "stellar-blade":
             return EnvironmentEdits(libd3dshared: true)
         case "witcher3":
             return EnvironmentEdits(appendOverrides: ";amd_fidelityfx_loader_dx12=n",

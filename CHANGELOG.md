@@ -4,6 +4,9 @@ All notable changes to MacGames are listed here.
 
 ## Unreleased
 
+- Add shared Steam profiles for A Plague Tale: Innocence, A Plague Tale: Requiem,
+  Resonance: A Plague Tale Legacy, and Stellar Blade, using D3DMetal. Installation,
+  launch routing, and process detection are covered by tests; gameplay testing is pending.
 - Search the library with Command-F, mark favorites, and sort by recently played games.
   Favorites and play history stay on this Mac, and failed launch attempts do not add history.
 - Show installed and running games first in an Installed Games sidebar section, with the
