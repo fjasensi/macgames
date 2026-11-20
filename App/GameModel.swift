@@ -266,11 +266,17 @@ final class LibraryModel {
     var selected: GameModel? { games.first { $0.id == selectedID } }
     var selectedEnvironment: GameEnvironment { selected?.profile.gameEnvironment ?? .steam }
 
-    /// Games grouped by the Windows environment they live in, shared Steam first.
+    /// Installed games first, then the remaining games grouped by Windows environment.
     var sections: [(title: String, games: [GameModel])] {
-        GameEnvironment.groups.map { group in
-            (group.title, group.games.compactMap { profile in games.first { $0.id == profile.id } })
+        let installed = games.filter { $0.state == .ready || $0.state == .running }
+        let installedIDs = Set(installed.map(\.id))
+        let environmentGroups = GameEnvironment.groups.map { group in
+            (title: group.title, games: group.games.compactMap { profile in
+                games.first { $0.id == profile.id && !installedIDs.contains($0.id) }
+            })
         }.filter { !$0.games.isEmpty }
+        guard !installed.isEmpty else { return environmentGroups }
+        return [("Installed Games", installed)] + environmentGroups
     }
 
     /// Games in sidebar order, for ⌘1…⌘9.
