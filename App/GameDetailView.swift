@@ -302,7 +302,7 @@ private struct SettingsSection: View {
                         Toggle("", isOn: $game.settings.optimized).labelsHidden().toggleStyle(.switch)
                     }
                 }
-                if game.profile.graphics == .dxmt {
+                if game.profile.id == "cs2" {
                     Divider().opacity(0.3)
                     row("Window size", detail: "Sets a borderless window that fits this display on the next launch.") {
                         Button("Reset", action: game.resetDisplay)

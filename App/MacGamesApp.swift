@@ -2,8 +2,11 @@ import Sparkle
 import SwiftUI
 
 struct MacGamesApp: App {
-    /// Checks the appcast of this repository's releases for a newer, signed MacGames.
-    private let updater = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
+    /// Local fork builds stay on the code installed by their owner.
+    private let updater: SPUStandardUpdaterController? = {
+        guard Bundle.main.object(forInfoDictionaryKey: "MacGamesDisableUpdates") as? Bool != true else { return nil }
+        return SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
+    }()
 
     var body: some Scene {
         Window("MacGames", id: "main") {
@@ -13,7 +16,9 @@ struct MacGamesApp: App {
         .defaultSize(width: 1180, height: 740)
         .commands {
             CommandGroup(after: .appInfo) {
-                Button("Check for Updates…") { updater.checkForUpdates(nil) }
+                if let updater {
+                    Button("Check for Updates…") { updater.checkForUpdates(nil) }
+                }
             }
         }
     }
