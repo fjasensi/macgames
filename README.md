@@ -55,7 +55,7 @@
 | [Command & Conquer: Red Alert 2](https://macgames.app/games/command-and-conquer-red-alert-2/) | Steam library | cnc-ddraw, CnCNet for online play |
 | [Heroes of Might and Magic III](https://macgames.app/games/heroes-of-might-and-magic-iii/) | Steam library | cnc-ddraw, sound fix |
 | [Diablo IV](https://macgames.app/games/diablo-iv/) | Steam library | D3DMetal |
-| [NieR:Automata](https://store.steampowered.com/app/524220/) | Steam library | DXMT, DirectX 11 (gameplay testing pending) |
+| [NieR:Automata](https://store.steampowered.com/app/524220/) | Steam library | DXMT, DirectX 11 |
 | [Path of Exile 2](https://macgames.app/games/path-of-exile-2/) | Steam library | D3DMetal, DirectX 12 |
 | [Hogwarts Legacy](https://macgames.app/games/hogwarts-legacy/) | Steam library | D3DMetal |
 | [The Witcher 3: Wild Hunt](https://macgames.app/games/the-witcher-3-wild-hunt/) | Steam library | D3DMetal, FidelityFX proxy |

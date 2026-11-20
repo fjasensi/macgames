@@ -7,7 +7,8 @@ All notable changes to MacGames are listed here.
 - Show installed and running games first in an Installed Games sidebar section, with the
   remaining games grouped by environment. The list updates as installations change.
 - Add a Steam profile for NieR:Automata in the shared library, using DXMT for DirectX 11.
-  Installation and launch routing are covered by tests; gameplay testing is pending.
+  Installation and launch routing are covered by tests. Gameplay confirmed working by
+  @fjasensi on 2026-11-20.
 
 ## 0.1.6 - 2026-11-18
 
