@@ -41,6 +41,8 @@
   game updates. A build whose layout does not fit falls back to standard Wine on its own.
 - **Kept apart from your Mac.** The Windows environment has no links into your home folder.
 - **Made for more games.** Adding a game is one profile in code. The library, artwork and setup follow.
+- **Find your games quickly.** Search with Command-F, use each game's star to save a favorite,
+  and filter by favorites or sort by recently played. Favorites and play history stay on your Mac.
 
 ## Supported games
 
@@ -119,6 +121,11 @@ To build MacGames yourself, use Xcode.
 1. Select a game and choose **Set up**. This takes about a minute the first time.
 2. Steam opens. Sign in, then install the game and keep the default folder.
 3. Choose **Play**. The Steam card in the sidebar shows downloads and lets you open or stop Steam.
+
+Use **Command-F** to search, **Command-Shift-F** to toggle the selected game's favorite,
+and **Command-Option-F** to filter favorites. The sort menu switches between the usual
+Installed Games-first library and recently played order. **Command-1** through **Command-9**
+select games in the displayed order.
 
 <p align="center">
   <img src="docs/assets/img/setup-rdr2.webp" width="820" alt="Red Dead Redemption 2 in the Rockstar group, with its setup steps">
