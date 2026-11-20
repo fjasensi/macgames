@@ -31,6 +31,16 @@ swift test
 
 Please run it before you open a pull request. Every change to `MacGamesCore` comes with a test.
 
+### Using the fork as your daily app
+
+Run `scripts/build-fork.sh` to build `build/fork/MacGames Fork.app`. Copy it to `/Applications`
+and launch that copy. Rebuild and replace it after changing the fork.
+
+The fork has its own app identifier and disables upstream app updates. It uses the existing
+`~/Library/Application Support/macgames` folder, including Steam and installed games, without
+the separate home directory used by isolated test builds. Quit the other MacGames app before
+using it so both launchers do not manage the same Steam session at once.
+
 ## How the code is organized
 
 | Path | What lives there |
