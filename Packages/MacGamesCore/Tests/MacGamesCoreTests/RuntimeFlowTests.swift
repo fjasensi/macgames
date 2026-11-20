@@ -136,6 +136,49 @@ struct FakeEnvironment {
 }
 
 @Suite(.serialized) struct RuntimeFlowTests {
+    @Test func nierInstallsInSharedSteamAndRestartsWithDXMT() throws {
+        let profile = try #require(GameProfile.named("nier-automata"))
+        let env = try FakeEnvironment(profile); defer { env.cleanUp() }
+        let runtime = env.runtime, paths = runtime.paths
+        try env.installSteam()
+        try EnvironmentSettings(hiDPI: true).save(to: paths)
+        let diablo4 = GameRuntime(profile: .diablo4, root: paths.root, runtime: runtime.runtime)
+        let previous = try diablo4.launchEnvironment()
+        try SteamSession.begin(fingerprint: SteamLaunch.fingerprint(previous), paths: paths, environment: previous)
+        env.live(["steam.exe"])
+
+        #expect(runtime.state() == .needsGame)
+        try runtime.openForInstall()
+        #expect(env.waitForCall(containing: "steam://install/524220"))
+        #expect(!env.calls.contains("wineserver -k"), "opening the installer must keep the existing Steam session")
+
+        try write("""
+        "AppState"
+        {
+            "appid" "524220"
+            "installdir" "NieRAutomata"
+            "StateFlags" "4"
+        }
+        """, to: paths.steamapps.appendingPathComponent("appmanifest_524220.acf"))
+        try write("game", to: paths.steamapps.appendingPathComponent("common/NieRAutomata/NieRAutomata.exe"))
+        #expect(runtime.state() == .ready)
+
+        let launch = try runtime.launchEnvironment()
+        #expect(paths.steamExe == diablo4.paths.steamExe)
+        #expect(launch["WINEPREFIX"] == previous["WINEPREFIX"])
+        #expect(launch["WINEDLLPATH"] == "\(paths.dxmtDLLs.path):\(paths.engineDLLs.path)")
+        #expect(launch["WINEDLLOVERRIDES"]?.contains("dxgi,d3d11,d3d10core,d3d12,atidxx64,winemetal=b") == true)
+        #expect(launch["DXMT_CS2_EARLY_COMPILE"] == nil)
+        #expect(launch["AOELAB_SIDECAR_PATH"] == nil)
+        try runtime.play(LaunchContext(width: 1920, height: 1080))
+        let calls = env.calls
+        let stop = try #require(calls.firstIndex(of: "wineserver -k"))
+        let play = try #require(calls.firstIndex { $0.hasSuffix("-applaunch 524220") })
+        #expect(stop < play, "Steam must leave D3DMetal before starting the DXMT game")
+        #expect(SteamSession.load(paths)?.fingerprint == SteamLaunch.fingerprint(launch))
+        #expect(!calls.contains { $0.contains("SteamSetup.exe") })
+    }
+
     @Test func diablo2InstallsAndPlaysInDiablo4sSteamSession() throws {
         let env = try FakeEnvironment(.diablo2ResurrectedSteam); defer { env.cleanUp() }
         let runtime = env.runtime, paths = runtime.paths
