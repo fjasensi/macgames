@@ -60,6 +60,26 @@ extension GameProfile {
         installFolder: "NieRAutomata", executableRelativePath: "NieRAutomata.exe", graphics: .dxmt,
         presentation: Presentation(accentHex: "C9C4B3", heroFocus: p(0.6, 0.45)))
 
+    public static let plagueTaleInnocence = GameProfile(
+        id: "plague-tale-innocence", title: "A Plague Tale: Innocence", steamAppID: "752590",
+        installFolder: "A Plague Tale Innocence", executableRelativePath: "APlagueTaleInnocence_x64.exe",
+        presentation: Presentation(accentHex: "B58A5B", heroFocus: p(0.65, 0.4)))
+
+    public static let plagueTaleRequiem = GameProfile(
+        id: "plague-tale-requiem", title: "A Plague Tale: Requiem", steamAppID: "1182900",
+        installFolder: "A Plague Tale Requiem", executableRelativePath: "APlagueTaleRequiem_x64.exe",
+        presentation: Presentation(accentHex: "A77F4D", heroFocus: p(0.6, 0.4)))
+
+    public static let plagueTaleResonance = GameProfile(
+        id: "plague-tale-resonance", title: "Resonance: A Plague Tale Legacy", steamAppID: "2713000",
+        installFolder: "Resonance A Plague Tale Legacy", executableRelativePath: "Resonance.exe",
+        presentation: Presentation(accentHex: "3E9B91", heroFocus: p(0.6, 0.4)))
+
+    public static let stellarBlade = GameProfile(
+        id: "stellar-blade", title: "Stellar Blade", steamAppID: "3489700",
+        installFolder: "StellarBlade", executableRelativePath: "SB/Binaries/Win64/SB-Win64-Shipping.exe",
+        presentation: Presentation(accentHex: "A6C6A8", heroFocus: p(0.6, 0.4)))
+
     public static let witcher3 = GameProfile(
         id: "witcher3", title: "The Witcher 3: Wild Hunt", steamAppID: "292030",
         installFolder: "The Witcher 3", executableRelativePath: "bin/x64_dx12/witcher3.exe",
@@ -140,7 +160,9 @@ extension GameProfile {
 
     public static let all: [GameProfile] = [
         .aoe4, .cs2, .aoe3, .aomRetold, .coh3, .zeroHour, .redAlert2, .heroes3,
-        .diablo4, .diablo2ResurrectedSteam, .nierAutomata, .poe2, .hogwarts, .witcher3, .eldenRing, .aow4,
+        .diablo4, .diablo2ResurrectedSteam, .nierAutomata,
+        .plagueTaleInnocence, .plagueTaleRequiem, .plagueTaleResonance, .stellarBlade,
+        .poe2, .hogwarts, .witcher3, .eldenRing, .aow4,
         .skyrim, .overwatch, .diablo4BattleNet, .diablo2Resurrected, .rdr2, .sanAndreas, .gta5,
     ]
 }
