@@ -2,7 +2,7 @@
   <img src="docs/images/icon.png" width="128" alt="MacGames icon">
 </p>
 
-<h1 align="center">MacGames</h1>
+<h1 align="center">MacGames Fork</h1>
 
 <p align="center">
   Play your Windows games from Steam and Battle.net on an Apple Silicon Mac.<br>
@@ -10,9 +10,18 @@
 </p>
 
 <p align="center">
-  <a href="https://macgames.app/"><b>Website</b></a> ·
-  <a href="https://github.com/tarikbc/macgames/releases/latest"><b>Download</b></a>
+  <a href="https://fjasensi.github.io/macgames/"><b>Website</b></a> ·
+  <a href="https://github.com/fjasensi/macgames"><b>Repository</b></a> ·
+  <a href="https://github.com/fjasensi/macgames/releases"><b>Releases</b></a> ·
+  <a href="https://github.com/fjasensi/macgames/issues"><b>Support</b></a> ·
+  <a href="CONTRIBUTING.md"><b>Contribute</b></a>
 </p>
+
+> **Independent fork maintained by [fjasensi](https://github.com/fjasensi).**
+> Derived from [MacGames by Tarik Caramanico](https://github.com/tarikbc/macgames).
+> This fork's releases, support and contributions are managed in
+> [fjasensi/macgames](https://github.com/fjasensi/macgames), independently of the original project.
+> Original credits, license and third-party notices are preserved.
 
 <p align="center">
   <a href="LICENSE"><img alt="License: PolyForm Noncommercial 1.0.0" src="https://img.shields.io/badge/license-PolyForm%20Noncommercial-5b4ae0"></a>
@@ -22,7 +31,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/assets/img/library-aoe4.webp" width="820" alt="The MacGames library with Age of Empires IV selected, ready to play">
+  <img src="docs/images/library-search.png" width="820" alt="MacGames Fork filtering the library by a search query, with favorite stars beside games">
 </p>
 
 ## What it does
@@ -46,6 +55,9 @@
 
 ## Supported games
 
+The game guides hosted at macgames.app below belong to the original project. For help with
+this fork, use [this repository's issues](https://github.com/fjasensi/macgames/issues).
+
 | Game | Environment | Renderer |
 |---|---|---|
 | [Age of Empires IV](https://macgames.app/games/age-of-empires-iv/) | Steam library | D3DMetal, x87sidecar optimization |
@@ -61,7 +73,7 @@
 | [A Plague Tale: Innocence](https://store.steampowered.com/app/752590/) | Steam library | D3DMetal (gameplay testing pending) |
 | [A Plague Tale: Requiem](https://store.steampowered.com/app/1182900/) | Steam library | D3DMetal (gameplay testing pending) |
 | [Resonance: A Plague Tale Legacy](https://store.steampowered.com/app/2713000/) | Steam library | D3DMetal (gameplay testing pending) |
-| [Stellar Blade](https://store.steampowered.com/app/3489700/) | Steam library | D3DMetal (gameplay testing pending) |
+| [Stellar Blade](https://store.steampowered.com/app/3489700/) | Steam library | D3DMetal (gameplay confirmed by @fjasensi) |
 | [Path of Exile 2](https://macgames.app/games/path-of-exile-2/) | Steam library | D3DMetal, DirectX 12 |
 | [Hogwarts Legacy](https://macgames.app/games/hogwarts-legacy/) | Steam library | D3DMetal |
 | [The Witcher 3: Wild Hunt](https://macgames.app/games/the-witcher-3-wild-hunt/) | Steam library | D3DMetal, FidelityFX proxy |
@@ -94,13 +106,16 @@ anti-cheat is at your own risk.
 
 ## Install
 
-Download `MacGames-<version>.dmg` from the [latest release](../../releases/latest), open it, and
-drag MacGames into Applications. The app is signed with a Developer ID and notarized by Apple.
-MacGames checks for updates itself; you can also choose **MacGames > Check for Updates…**.
+Check [this fork's releases](https://github.com/fjasensi/macgames/releases) for packaged builds.
+If no app package is available, build it using the instructions below.
+
+Local builds are ad-hoc signed. They do not inherit the original app's Developer ID signing or
+notarization. Updates are manual: rebuild and replace the app, or install a newer fork release.
+The fork does not use the original project's automatic update feed.
 
 ## Build and run
 
-To build MacGames yourself, use Xcode.
+To build MacGames Fork yourself, use Xcode.
 
 1. Install **Xcode 27**, **XcodeGen** and **CMake** (`brew install xcodegen cmake`).
 2. Get the runtime: the Wine engine, DXMT and x87sidecar, with their source code and licenses.
@@ -109,18 +124,23 @@ To build MacGames yourself, use Xcode.
    scripts/fetch-runtime.sh
    ```
 
-   This downloads the runtime archive (about 125 MB) from this repository's
-   [releases](../../releases), checks its SHA-256 and signatures, and unpacks it into `Vendor/`.
+   This downloads the pinned runtime archive (about 125 MB) from the
+   [original project's runtime release](https://github.com/tarikbc/macgames/releases/tag/runtime-4),
+   checks its SHA-256 and signatures, and unpacks it into `Vendor/`.
 3. Build and open the app:
 
    ```sh
-   xcodegen generate
-   xcodebuild -project MacGames.xcodeproj -scheme MacGames -configuration Release \
-     -derivedDataPath build/DerivedData build
-   open build/DerivedData/Build/Products/Release/MacGames.app
+   scripts/build-fork.sh
+   ditto 'build/fork/MacGames Fork.app' '/Applications/MacGames Fork.app'
+   open '/Applications/MacGames Fork.app'
    ```
 
-## Using MacGames
+Quit MacGames Fork before replacing it. The fork has its own app identifier but reuses
+`~/Library/Application Support/macgames`, including your existing Steam installation and games.
+Run one MacGames launcher at a time so they do not manage the same Steam session simultaneously.
+The fork still uses pinned upstream runtime and game-pack downloads; it maintains its own app code.
+
+## Using MacGames Fork
 
 1. Select a game and choose **Set up**. This takes about a minute the first time.
 2. Steam opens. Sign in, then install the game and keep the default folder.
@@ -130,6 +150,10 @@ Use **Command-F** to search, **Command-Shift-F** to toggle the selected game's f
 and **Command-Option-F** to filter favorites. The sort menu switches between the usual
 Installed Games-first library and recently played order. **Command-1** through **Command-9**
 select games in the displayed order.
+
+<p align="center">
+  <img src="docs/images/library-favorites.png" width="820" alt="MacGames Fork with the Favorites filter enabled and games sorted by recently played">
+</p>
 
 <p align="center">
   <img src="docs/assets/img/setup-rdr2.webp" width="820" alt="Red Dead Redemption 2 in the Rockstar group, with its setup steps">
@@ -144,7 +168,7 @@ of a group is installed any more, **Remove setup** deletes that group's launcher
 Everything also works from the command line, which helps with scripts and bug reports:
 
 ```sh
-MacGames.app/Contents/MacOS/MacGames --command status --game aoe4
+'/Applications/MacGames Fork.app/Contents/MacOS/MacGames' --command status --game aoe4
 ```
 
 Commands: `check`, `setup`, `steam`, `install`, `play`, `stop`, `uninstall`, `remove-setup`, `status`,
@@ -153,7 +177,7 @@ Commands: `check`, `setup`, `steam`, `install`, `play`, `stop`, `uninstall`, `re
 ## How it works
 
 ```
-MacGames.app
+MacGames Fork.app
  ├─ sets up   ~/Library/Application Support/macgames/steam
  │             ├─ deps/Frameworks   libraries and D3DMetal (downloaded, hash checked)
  │             ├─ engine            Wine 11 + DXMT + controller overlays
@@ -188,6 +212,7 @@ statement about Wine on macOS, so play online at your own risk.
 Bug reports, test results from other Macs, and new game profiles are very welcome.
 Read [CONTRIBUTING.md](CONTRIBUTING.md) to get started, and please follow the
 [code of conduct](CODE_OF_CONDUCT.md).
+Open issues and pull requests in [fjasensi/macgames](https://github.com/fjasensi/macgames).
 
 ## License
 
@@ -203,6 +228,10 @@ Third-party components keep their own licenses. Wine stays LGPL, and x87sidecar 
 See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ## Credits
+
+This fork is maintained by [fjasensi](https://github.com/fjasensi) and is derived from
+[MacGames](https://github.com/tarikbc/macgames) by **Tarik Caramanico** and its contributors.
+The original app icon and existing upstream documentation artwork are retained.
 
 MacGames stands on these open-source projects:
 

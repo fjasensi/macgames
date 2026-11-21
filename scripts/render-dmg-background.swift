@@ -86,7 +86,7 @@ func draw() {
     radial([amber.withAlphaComponent(0.3), ember.withAlphaComponent(0.1), ember.withAlphaComponent(0)], at: NSPoint(x: W / 2, y: 58), radius: 210)
     let title = NSFont.systemFont(ofSize: 54, weight: .black, width: .condensed)
     func slanted(_ color: NSColor, dx: CGFloat, top: CGFloat) {
-        let attributed = NSAttributedString(string: "MacGames", attributes: [.font: title, .foregroundColor: color, .kern: 0.5])
+        let attributed = NSAttributedString(string: "MacGames Fork", attributes: [.font: title, .foregroundColor: color, .kern: 0.5])
         let size = attributed.size(), baseline = top + title.ascender
         NSGraphicsContext.saveGraphicsState()
         let shear = NSAffineTransform()
@@ -138,7 +138,7 @@ func draw() {
     withShadow(amber.withAlphaComponent(0.7), blur: 6) { NSColor.white.setStroke(); chevron.stroke() }
 
     // Instruction on a glass capsule, led by a play glyph, with room to the window's bottom edge.
-    let hint = NSAttributedString(string: "Drag MacGames into Applications, then open it from there.",
+    let hint = NSAttributedString(string: "Drag MacGames Fork into Applications, then open it.",
                                   attributes: [.font: NSFont.systemFont(ofSize: 12.5, weight: .medium),
                                                .foregroundColor: NSColor.white.withAlphaComponent(0.88)])
     let pillWidth = hint.size().width + 50, pill = NSRect(x: W / 2 - pillWidth / 2, y: 370, width: pillWidth, height: 30)

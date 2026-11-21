@@ -1,9 +1,14 @@
-# Security policy
+# MacGames Fork security policy
+
+This policy applies to [fjasensi/macgames](https://github.com/fjasensi/macgames), an independent
+fork of MacGames maintained by [fjasensi](https://github.com/fjasensi).
 
 ## Reporting a problem
 
-Please do not open a public issue for a security problem. Report it privately through the
-**Security** tab of this repository ("Report a vulnerability"). You get an answer within a week.
+Please do not post vulnerability details in a public issue. If this repository's **Security**
+tab offers **Report a vulnerability**, use it. Otherwise, ask the fork maintainer through a
+[new issue](https://github.com/fjasensi/macgames/issues/new/choose) for a private reporting
+channel, without including exploit steps, credentials or other sensitive details.
 
 ## What counts
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Downloads the prebuilt MacGames runtime (Wine, DXMT, x87sidecar, with their
-# source code and licenses) from this repository's releases into Vendor/.
+# source code and licenses) from the original project's releases into Vendor/.
 # Usage: scripts/fetch-runtime.sh [path to a local macgames-runtime-*.tar.xz]
 set -euo pipefail
 

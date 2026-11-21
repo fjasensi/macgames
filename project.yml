@@ -2,7 +2,7 @@
 name: MacGames
 options:
   minimumXcodeGenVersion: "2.42.0"
-  bundleIdPrefix: com.tarikbc
+  bundleIdPrefix: com.fjasensi
   developmentLanguage: en
   deploymentTarget:
     macOS: "26.0"
@@ -53,7 +53,7 @@ targets:
         embed: false
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.tarikbc.macgames
+        PRODUCT_BUNDLE_IDENTIFIER: com.fjasensi.macgames
         PRODUCT_NAME: MacGames
         ENABLE_APP_SANDBOX: NO
         GENERATE_INFOPLIST_FILE: NO
@@ -62,16 +62,17 @@ targets:
     info:
       path: App/Info.plist
       properties:
-        CFBundleDisplayName: MacGames
+        CFBundleName: MacGames Fork
+        CFBundleDisplayName: MacGames Fork
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         LSMinimumSystemVersion: "26.0"
         LSApplicationCategoryType: public.app-category.games
         NSMicrophoneUsageDescription: "Allow microphone access for in-game voice chat."
         NSHighResolutionCapable: true
-        # Sparkle: the feed lives in the "appcast" release; updates must carry this key's signature.
-        SUFeedURL: https://github.com/tarikbc/macgames/releases/download/appcast/appcast.xml
-        SUPublicEDKey: 7WXA3k62dGas339ybVRjgt7oWvd6O51hxr5Qy50VQ4k=
+        NSHumanReadableCopyright: "Copyright 2026 Tarik Caramanico. Independent fork maintained by fjasensi."
+        # Updates are manual until this fork has its own signed update feed.
+        MacGamesDisableUpdates: true
     postBuildScripts:
       - name: Embed runtime
         script: "\"$SRCROOT/scripts/embed-runtime.sh\""

@@ -1,8 +1,12 @@
-# Releasing MacGames
+# Releasing MacGames Fork
 
-A release is a Developer ID signed and notarized disk image, a Sparkle update zip, and an
-updated feed. `scripts/release.sh` does all of it on a Mac that holds the credentials below.
-Nothing secret lives in this repository.
+Fork releases are published in [fjasensi/macgames](https://github.com/fjasensi/macgames/releases).
+They are independent of the original MacGames releases. The fork uses manual updates and has
+no automatic update feed; it does not use the upstream Sparkle feed or signing key.
+
+For a local build, use `scripts/build-fork.sh` as described in
+[CONTRIBUTING.md](CONTRIBUTING.md#using-the-fork-as-your-daily-app).
+Publishing a notarized release requires the maintainer's own Apple signing credentials.
 
 ## One-time setup
 
@@ -15,17 +19,8 @@ Nothing secret lives in this repository.
    ```
 
    Pass the profile name as `NOTARY_PROFILE` when you release.
-3. **Update signing.** Build the app once, so Swift Package Manager fetches Sparkle, then make
-   the MacGames key in your keychain:
-
-   ```sh
-   build/DerivedData/SourcePackages/artifacts/sparkle/Sparkle/bin/generate_keys --account macgames
-   ```
-
-   It prints the public key, which goes in `project.yml` as `SUPublicEDKey`. Export a backup of
-   the private key (`generate_keys --account macgames -x <file>`) and keep it outside the
-   repository. Without it, existing installs cannot verify new updates.
-4. **GitHub.** Sign in with `gh auth login`, with push rights to the repository.
+3. **GitHub.** Sign in with `gh auth login`, with push rights to `fjasensi/macgames`.
+   Confirm that `origin` points to the fork before publishing a tag.
 
 ## Each release
 
@@ -37,15 +32,18 @@ Nothing secret lives in this repository.
    NOTARY_PROFILE=<profile name> scripts/release.sh <version>
    ```
 
-The script builds the Release app, signs it inside out with the hardened runtime, notarizes and
-staples the app and the disk image, signs the update zip for Sparkle, tags `v<version>`, publishes
-the GitHub release, and uploads `appcast.xml` to the `appcast` release.
+The script builds `MacGames Fork.app`, signs it with the maintainer's Developer ID and the
+hardened runtime, notarizes the app and disk image, and publishes `MacGames-Fork-<version>.dmg`
+and a ZIP archive to the fork's GitHub release. Users install updates by replacing the app;
+Steam, installed games and local library preferences remain in their existing data folders.
 
-## Rules that keep updates working
+## Runtime and licensing
 
-- The feed lives in the `appcast` release, at a fixed URL. Never delete that release.
+- The app still downloads the pinned upstream runtime and game packs. Their signatures,
+  source archives, hashes and licenses stay intact.
 - The Wine runtime and the packs keep the signatures they ship with. The script never re-signs
   them: Wine's entitlements must stay as they are.
 - `MacGamesBridge` needs `App/MacGamesBridge.entitlements`. Without it, the hardened runtime
   removes the `DYLD_` variables that Wine needs before the bridge hands them on to x87sidecar.
-- Publish runtime and pack releases with `--latest=false`, so the app release stays the latest one.
+- Preserve the original MacGames copyright, [LICENSE](LICENSE) and
+  [third-party notices](THIRD_PARTY_NOTICES.md) in every release.

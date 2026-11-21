@@ -4,9 +4,16 @@ All notable changes to MacGames are listed here.
 
 ## Unreleased
 
+- Hide the last Steam account name while Steam is closed, including in the library screenshots.
+- Add a standalone MacGames Fork landing page on GitHub Pages, with its own design,
+  library screenshots, build instructions and links to the fork's support and releases.
+- Identify MacGames Fork as an independent fork maintained by fjasensi in the README, About
+  panel and Help menu. Point support and contribution links to the fork, preserve upstream
+  credits, and disable upstream app updates in all builds. Add library search and favorites screenshots.
 - Add shared Steam profiles for A Plague Tale: Innocence, A Plague Tale: Requiem,
   Resonance: A Plague Tale Legacy, and Stellar Blade, using D3DMetal. Installation,
-  launch routing, and process detection are covered by tests; gameplay testing is pending.
+  launch routing, and process detection are covered by tests. Stellar Blade gameplay
+  confirmed working by @fjasensi on 2026-11-21; A Plague Tale gameplay testing is pending.
 - Search the library with Command-F, mark favorites, and sort by recently played games.
   Favorites and play history stay on this Mac, and failed launch attempts do not add history.
 - Show installed and running games first in an Installed Games sidebar section, with the
