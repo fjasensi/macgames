@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MacGames Fork — Windows games, one Mac library</title>
+  <meta name="description" content="An independent MacGames fork maintained by fjasensi. Windows games on Apple Silicon, with a shared Steam library, search, favorites and recently played games.">
+  <meta name="theme-color" content="#10171b">
+  <link rel="canonical" href="https://fjasensi.github.io/macgames/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MacGames Fork">
+  <meta property="og:description" content="Windows games, one Mac library. An independent fork maintained by fjasensi.">
+  <meta property="og:url" content="https://fjasensi.github.io/macgames/">
+  <meta property="og:image" content="https://fjasensi.github.io/macgames/assets/library-search.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header wrap">
+    <a class="wordmark" href="#"><span class="monogram" aria-hidden="true">m<span>g</span></span>MacGames <strong>Fork</strong></a>
+    <nav aria-label="Main navigation">
+      <a href="#library">The library</a>
+      <a href="#get-started">Get started</a>
+      <a href="https://github.com/fjasensi/macgames">GitHub</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="title">
+      <div class="hero-copy">
+        <p class="eyebrow">Independent fork · Maintained by fjasensi</p>
+        <h1 id="title">Windows games.<br>One <em>Mac library.</em></h1>
+        <p class="lead">Your Steam and Battle.net games on Apple Silicon, with a launcher that keeps your next game easy to find.</p>
+        <div class="actions">
+          <a class="button primary" href="#get-started">Build &amp; install</a>
+          <a class="button secondary" href="https://github.com/fjasensi/macgames">Explore the repository</a>
+        </div>
+        <p class="requirements">Apple Silicon · macOS 26+ · Free for non-commercial use</p>
+      </div>
+      <figure class="hero-image">
+        <a href="assets/library-search.png" aria-label="Open the full-size library search screenshot">
+          <img src="assets/library-search.png" width="2336" height="1460" alt="The MacGames Fork library filtered by diablo, showing matching games and favorite stars" fetchpriority="high">
+        </a>
+        <figcaption>The actual app. Find a game, then pick up where you left off.</figcaption>
+      </figure>
+    </section>
+
+    <div class="principles wrap" aria-label="Library features">
+      <span>A shared Steam library</span><span>Search &amp; favorites</span><span>Recently played games</span>
+    </div>
+
+    <section class="library-section wrap" id="library" aria-labelledby="library-title">
+      <div class="section-intro">
+        <p class="eyebrow">Less scrolling. More playing.</p>
+        <h2 id="library-title">Keep your next game close.</h2>
+      </div>
+      <div class="library-layout">
+        <figure class="library-image">
+          <a href="assets/library-favorites.png" aria-label="Open the full-size favorites screenshot">
+            <img src="assets/library-favorites.png" width="2336" height="1466" alt="Favorites enabled in MacGames Fork, with Stellar Blade selected and Steam closed" loading="lazy">
+          </a>
+          <figcaption>Favorites and play history stay on your Mac.</figcaption>
+        </figure>
+        <dl class="feature-list">
+          <div><dt>Find it by name</dt><dd>Press <kbd>⌘</kbd> <kbd>F</kbd> to search your library. Installed games appear first in the default view.</dd></div>
+          <div><dt>Save your favorites</dt><dd>Star a game and use the Favorites filter to keep your own shortlist.</dd></div>
+          <div><dt>Return to a recent game</dt><dd>Sort by recently played to bring your last sessions back to the top.</dd></div>
+          <div><dt>Use the Steam you already have</dt><dd>The fork reuses your MacGames Steam environment and installed games. Run one launcher at a time.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="additions wrap" aria-labelledby="games-title">
+      <div>
+        <p class="eyebrow">Growing at its own pace</p>
+        <h2 id="games-title">More games in the library.</h2>
+        <p>Recent additions include NieR:Automata, A Plague Tale: Innocence, A Plague Tale: Requiem, Resonance: A Plague Tale Legacy and Stellar Blade.</p>
+        <p class="testing-note">NieR:Automata and Stellar Blade have been tested in gameplay by fjasensi. The A Plague Tale profiles still need gameplay testing.</p>
+      </div>
+      <a class="text-link" href="https://github.com/fjasensi/macgames#supported-games">See the game list and testing notes</a>
+    </section>
+
+    <section class="install-section wrap" id="get-started" aria-labelledby="install-title">
+      <div>
+        <p class="eyebrow">Make it yours</p>
+        <h2 id="install-title">Start with the fork.</h2>
+        <p>Build locally with Xcode 27, XcodeGen and CMake. You’ll also need an Apple Silicon Mac with macOS 26 or later and Rosetta 2.</p>
+        <p>Local builds are ad-hoc signed. Updates are manual, and your Steam library stays in its existing folder.</p>
+        <div class="actions">
+          <a class="button primary" href="https://github.com/fjasensi/macgames#build-and-run">Full build instructions</a>
+          <a class="button secondary" href="https://github.com/fjasensi/macgames/releases">Fork releases</a>
+        </div>
+        <p class="small">Packaged builds, when available, are listed in the fork’s releases.</p>
+      </div>
+      <div class="terminal">
+        <div class="terminal-heading">Build from source</div>
+        <pre><code>git clone https://github.com/fjasensi/macgames.git
+cd macgames
+scripts/fetch-runtime.sh
+scripts/build-fork.sh</code></pre>
+        <p>Then copy <code>build/fork/MacGames Fork.app</code> to Applications. See the build instructions for prerequisites.</p>
+      </div>
+    </section>
+
+    <section class="project-note wrap" aria-label="Project origin and support">
+      <h2>An independent fork, with credit to its roots.</h2>
+      <p>Maintained by <a href="https://github.com/fjasensi">fjasensi</a>, derived from <a href="https://github.com/tarikbc/macgames">MacGames by Tarik Caramanico</a> and its contributors. This fork manages its own app code, releases and support. It still uses pinned upstream runtimes and game packs.</p>
+      <p>Found a bug or tested a game? <a href="https://github.com/fjasensi/macgames/issues">Open an issue</a> or read the <a href="https://github.com/fjasensi/macgames/blob/main/CONTRIBUTING.md">contribution guide</a>.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer wrap">
+    <p>MacGames Fork <span>by fjasensi</span></p>
+    <nav aria-label="Project links">
+      <a href="https://github.com/fjasensi/macgames">Source</a>
+      <a href="https://github.com/fjasensi/macgames/issues">Support</a>
+      <a href="LICENSE">License</a>
+      <a href="THIRD_PARTY_NOTICES.md">Third-party notices</a>
+    </nav>
+    <p class="attribution">Original MacGames: Copyright 2026 Tarik Caramanico. PolyForm Noncommercial 1.0.0. Game names and artwork belong to their owners. Not affiliated with Valve, Apple or the game publishers.</p>
+  </footer>
+</body>
+</html>
