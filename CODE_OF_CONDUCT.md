@@ -37,7 +37,7 @@ This Code of Conduct applies within all community spaces, and also applies when 
 
 ## Enforcement
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to the community leaders responsible for enforcement at a private message to [@tarikbc](https://github.com/tarikbc) on GitHub, or through a private report under the repository's **Security** tab. All complaints will be reviewed and investigated promptly and fairly.
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to this fork's maintainer, [@fjasensi](https://github.com/fjasensi). Follow the [security policy](SECURITY.md#reporting-a-problem) to request a private reporting channel. Do not post private incident details in public issues. All complaints will be reviewed and investigated promptly and fairly.
 
 All community leaders are obligated to respect the privacy and security of the reporter of any incident.
 

@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>MacGames</string>
+	<string>MacGames Fork</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
+	<string>MacGames Fork</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -28,9 +28,9 @@
 	<true/>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Allow microphone access for in-game voice chat.</string>
-	<key>SUFeedURL</key>
-	<string>https://github.com/tarikbc/macgames/releases/download/appcast/appcast.xml</string>
-	<key>SUPublicEDKey</key>
-	<string>7WXA3k62dGas339ybVRjgt7oWvd6O51hxr5Qy50VQ4k=</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright 2026 Tarik Caramanico. Independent fork maintained by fjasensi.</string>
+	<key>MacGamesDisableUpdates</key>
+	<true/>
 </dict>
 </plist>

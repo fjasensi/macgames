@@ -384,7 +384,7 @@ private struct SteamControl: View {
 
     private func subtitle(running: Bool, installed: Bool, name: String, account: SteamAccount?) -> String {
         if !installed { return "Set up a game to install \(name)" }
-        if let persona = account?.personaName { return running ? "Signed in as \(persona)" : "\(persona), not running" }
+        if running, let persona = account?.personaName { return "Signed in as \(persona)" }
         return running ? "Running" : "Not running"
     }
 }

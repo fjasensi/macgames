@@ -9,4 +9,4 @@
 
 ## License
 
-- [ ] I agree that my contribution is licensed as described in [CONTRIBUTING.md](https://github.com/tarikbc/macgames/blob/main/CONTRIBUTING.md#license-of-contributions).
+- [ ] I agree that my contribution is licensed as described in [CONTRIBUTING.md](https://github.com/fjasensi/macgames/blob/main/CONTRIBUTING.md#license-of-contributions).

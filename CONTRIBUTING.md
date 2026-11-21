@@ -1,4 +1,9 @@
-# Contributing to MacGames
+# Contributing to MacGames Fork
+
+This independent fork is maintained by [fjasensi](https://github.com/fjasensi), derived from
+[MacGames by Tarik Caramanico](https://github.com/tarikbc/macgames). Please send this fork's
+[issues](https://github.com/fjasensi/macgames/issues) and
+[pull requests](https://github.com/fjasensi/macgames/pulls) to `fjasensi/macgames`.
 
 Thank you for helping. MacGames gets better with every Mac it is tested on and every game someone adds.
 You do not need to write code to help: a good bug report or a test on a different Mac is just as useful.
@@ -15,7 +20,7 @@ You do not need to write code to help: a good bug report or a test on a differen
 You need an Apple Silicon Mac with macOS 26 or later, Xcode 27 and XcodeGen.
 
 ```sh
-git clone https://github.com/tarikbc/macgames.git
+git clone https://github.com/fjasensi/macgames.git
 cd macgames
 scripts/fetch-runtime.sh   # once: downloads the runtime into Vendor/
 xcodegen generate
@@ -40,6 +45,10 @@ The fork has its own app identifier and disables upstream app updates. It uses t
 `~/Library/Application Support/macgames` folder, including Steam and installed games, without
 the separate home directory used by isolated test builds. Quit the other MacGames app before
 using it so both launchers do not manage the same Steam session at once.
+
+The standard Xcode build also uses the fork identifier and disables automatic updates.
+The runtime and game packs remain pinned downloads from the original project, with their
+existing signatures, hashes, source archives and licenses.
 
 ## How the code is organized
 

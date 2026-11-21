@@ -9,16 +9,27 @@ struct MacGamesApp: App {
     }()
 
     var body: some Scene {
-        Window("MacGames", id: "main") {
+        Window(ForkIdentity.name, id: "main") {
             LibraryView()
         }
         .windowStyle(.hiddenTitleBar)
         .defaultSize(width: 1180, height: 740)
         .commands {
+            CommandGroup(replacing: .appInfo) {
+                Button("About \(ForkIdentity.name)") { ForkIdentity.showAbout() }
+            }
             CommandGroup(after: .appInfo) {
                 if let updater {
                     Button("Check for Updates…") { updater.checkForUpdates(nil) }
                 }
+            }
+            CommandGroup(replacing: .help) {
+                Link("MacGames Fork Help", destination: ForkIdentity.repository)
+                Link("Report an Issue…", destination: ForkIdentity.issues)
+                Link("Contribute…", destination: ForkIdentity.contributing)
+                Link("Fork Releases…", destination: ForkIdentity.releases)
+                Divider()
+                Link("Original MacGames Project", destination: ForkIdentity.upstream)
             }
         }
     }
